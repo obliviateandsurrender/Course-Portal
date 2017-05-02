@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ITWS Assignment 7 | [[20161073]]</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <script src="./main.js"></script>
+
+    <style>
+        body { 
+            padding-top: 65px;
+            background:#2B2B2B 
+        }
+        h2 {
+            border-bottom: 3px solid gray;
+        }
+        #JSOOP{
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #adns {
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #adnc {
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #alos {
+            height:300vh; margin-top: 30px;padding-top: 150px;}
+        #aloc {
+            height:300vh; margin-top: 30px;padding-top: 150px;}
+        #adcrs {
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #rmcrs {
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #rmstd {
+            height:100vh; margin-top: 30px;padding-top: 150px;}
+        #dassc {
+            height:300vh; margin-top: 30px;padding-top: 150px;}
+        #dcss {
+            height:300vh; margin-top: 30px;padding-top: 150px;}
+        td, table {
+            width: 33%;
+        }
+    </style>
+</head>
+
+
+<body style="background:#2B2B2B">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+        </button>
+      <a class="navbar-brand" href="#JSAPI">JavaScript API</a>
+    </div>
+    <div id="navbar-collapse-main">
+    <ul class="nav navbar-nav">
+      <li><a href="#adns">Add New Student</a></li>
+      <li><a href="#adnc">Add New Course</a></li>
+      <li><a href="#alos">List of Students</a></li>
+      <li><a href="#aloc">List of Courses</a></li>
+      <li><a href="#adcrs">Add &amp; Drop Courses</a></li>
+      <li><a href="#rmcrs">Remove a Course</a></li>
+      <li><a href="#rmstd">Remove a Student</a></li>
+      <li><a href="#dassc">Display a Course's Students</a></li>
+      <li><a href="#dcss">Display a Student's Course</a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.navLinks').hide();
+    $('#JSOOP').show();
+    viewAllCourses();
+    viewAllStudents();
+});
+</script>
+
+<script type="text/javascript">
+    $('nav a').click(function() {
+  $('.navLinks').hide();
+  $(this.getAttribute('href')).show()
+});
+</script>
+    <div id="JSOOP" style="background:#FFF056 !important; height: 300px; margin-top:50px ; margin-bottom: 50px; padding-top: 15px" class="container navLinks">
+        <h1 class="text-center" style="font-family: 'Droid Serif'; font-weight: bolder; font-size: 650% ">JavaScript API</h1>
+        
+    </div>
+     
+    <div id="adns" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Add new student</h2>
+        <br/>
+        <br/>
+        <form id="addNewStudent" onsubmit="return false">
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <div class="form-group">
+                    <label for="megaroll">Roll Number:</label>
+                    <br>
+                    <input id="megaroll" type="text" class="form-control" placeholder="Enter Roll Number">
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <div class="form-group">
+                    <label for="meganame">Name:</label>
+                    <br>
+                    <input id="meganame" type="text" class="form-control" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-lg-3">
+                <div class="form-group">
+                    <label for="megayear">Year:</label>
+                    <br/>
+                    <input id="megayear" type="text" class="form-control" placeholder="Enter Year">
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-6 col-lg-1" style="margin-top: 5px">
+                <br/>
+                <button onclick="addNewStudent1(); viewAllStudents(); this.form.reset();" type="button" class="btn btn-success">Add Student</button>
+            </div>
+        </form>
+    </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    <div id="adnc" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Add new course</h2>
+        <br/>
+        <br/>
+        <form id="addNewCourse"  onsubmit="return false">
+            <div class="form-group col-md-5 col-xs-12 col-lg-5">
+                <div class="form-group">
+                    <label for="classicid">Course Id:</label>
+                    <br>
+                    <input id="classicid" type="text" class="form-control" placeholder="Enter Id">
+                </div>
+            </div>
+            <div class="form-group col-md-4 col-xs-12 col-lg-4">
+                <div class="form-group">
+                    <label for="classicname">Name:</label>
+                    <br>
+                    <input id="classicname" type="text" class="form-control" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="form-group col-md-1 col-xs-6 col-lg-1" style="margin-top: 5px">
+                <br />
+                <button onclick="addNewCourse1(); viewAllCourses(); this.form.reset();" type="button" class="btn btn-success">Add Course</button>
+            </div>
+        </form>
+    </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    <div id="alos" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+    <br/>
+        <h2 class="display-3" style="font-weight:bold;">List Of Students</h2>
+
+        <table id="allStudents" class="table table-striped">
+            <thead class="thead-inverse">
+                <tr>
+                    <td>
+                        <h3>Roll</h3>
+                    </td>
+                    <td>
+                        <h3>Name</h3>
+                    </td>
+                    <td>
+                        <h3>Year</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+        <br />
+        <br />
+        <br />
+    <div id="aloc" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+    <br/>
+        <h2 class="display-3" style="font-weight:bold;">List Of Courses</h2>
+
+        <table id="allCourses" class="table table-hover">
+            <thead class="thead-default">
+                <tr>
+                    <td>
+                        <h3>Id</h3>
+                    </td>
+                    <td >
+                        <h3>Name</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+        <br/>
+        <br/>
+        <br/>
+    <div id="adcrs" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Add &amp; Drop Courses</h2>
+        <br/>
+        <br/>
+        <form id="AddStudentToCourse" onsubmit="return false">
+            <h5>Select Student &amp; the Respective Course:</h5>
+            <div class=" form-group col-md-3 col-xs-3 col-lg-3 ">
+                <select id="students" class="form-control selectpicker" data-style="btn-primary">
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <select id="courses" class="form-control selectpicker" data-style="btn-primary">
+                </select>
+            </div>
+            <div class="form-group col-md-2 col-xs-3 col-lg-2"></div>
+            <div class="form-group ">
+                <button class="btn btn-success" onclick='addStudentToCourseHelper()' type="button" style="margin-right: 50px">Enroll Student</button>
+                <button class="btn btn-danger" onclick='dropStudentFromCourseHelper()' type="button">Drop Course</button>
+            </div>
+        </form>
+    </div>
+        <br />
+        <br />
+        <br />
+    <div id="rmcrs" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Remove Course</h2>
+        <br />
+        <br />
+        <form id="RemoveCourse"  onsubmit="return false">
+            <h5>Select Course:</h5>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <select id="course_remove" class="form-control">
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+            <button class="btn btn-danger" onclick='removeCourseRemover();' type="button">Remove Course</button>
+            </div>
+            <br />
+            <br />
+            <br />
+            <hr>
+        </form>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+
+    <div id="rmstd" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Remove Student</h2>
+        <br />
+        <br />
+        <form id="RemoveStudent"  onsubmit="return false">
+        <h5>Select Student:</h5>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <select id="student_remove" class="form-control">
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <button class="btn btn-danger" onclick='removeStudentRemover()' type="button">Remove Student</button>
+            </div>
+        </form>
+        <br />
+        <br />
+        <br />
+    </div>
+    <div id="dassc" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Display All Students of Selected Course</h2>
+        <br/>
+        <br/>
+        <form id="DisplayStudents" onsubmit="return false">
+        <h5>Select Course:</h5>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <select id="courses_display" class="form-control">
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <button class="btn btn-primary" onclick='viewEnrolledHelper()' type="button">Display Students</button>
+            </div>
+        </form>
+        <br />
+        <br />
+        <div>
+        <table id="selected_students" class="table table-hover" >
+            <thead class="thead-inverse">
+                <tr>
+                    <td>
+                        <h3>Roll</h3>
+                    </td>
+                    <td>
+                        <h3>Name</h3>
+                    </td>
+                    <td>
+                        <h3>Year</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        </div>
+        <br />
+        <br />
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div id="dcss" class="container navLinks" style="background:#ECECEA; margin-bottom:30px;">
+        <br/>
+        <h2 class="display-3" style="font-weight:bold;">Display Courses Selected By Student</h2>
+        <br/>
+        <br/>
+        <form id="DisplayCourses" onsubmit="return false">
+        <h5>Select Student:</h5>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <select id="students_display" class="form-control">
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-xs-3 col-lg-3">
+                <button class="btn btn-primary" onclick='viewCoursesTakenHelper()' type="button">Display Courses</button>
+            </div>
+        </form>
+        <table id="selected_courses" class="table table-hover" >
+            <thead>
+                <tr>
+                    <td>
+                        <h3>Id</h3>
+                    </td>
+                    <td>
+                        <h3>Name</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br />
+        <br />
+    </div>
+</body>
+</html>
